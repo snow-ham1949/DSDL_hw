@@ -62,9 +62,9 @@ module cla_gl(
 	AND G_1(G[1], A[1], B[1]);
 	AND G_2(G[2], A[2], B[2]);
 	
-	XOR P_0(P[0], A[0], B[0]);
-	XOR P_1(P[1], A[1], B[1]);
-	XOR P_2(P[2], A[2], B[2]);
+	OR P_0(P[0], A[0], B[0]);
+	OR P_1(P[1], A[1], B[1]);
+	OR P_2(P[2], A[2], B[2]);
 
 	wire G1P2, G0P1P2, C0P0P1P2;
 	AND g1p2(G1P2, G[1], P[2]);
@@ -82,10 +82,11 @@ module cla_gl(
 	OR4 c2(C2, G[1], G0P1, C0P0P1, 1'b0);
 
 	wire S_0, S_1, S_2;
-	FA fa0(C1, S_0, A[0], B[0], C0);
-	FA fa1(C2, S_1, A[1], B[1], C1);
-	FA fa2(C3, S_2, A[2], B[2], C2);
-
+	wire _C3, _C2, _C1;
+	FA fa2(_C3, S_2, A[2], B[2], C2);
+	FA fa1(_C2, S_1, A[1], B[1], C1);
+	FA fa0(_C1, S_0, A[0], B[0], C0);
+	
 	assign S = {S_2, S_1, S_0};
 
 endmodule
