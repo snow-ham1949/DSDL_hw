@@ -46,21 +46,21 @@ module mult_tb();
 	// clock cycle = 10 ticks
 	reg clock = 1;
 	always
-		#5 clock <= ~clock;
+		#4 clock <= ~clock;
 	// multiplier
 	reg[3:0] A, B;
 	wire[7:0] P;
 	reg[7:0] P_ref;
 	mult_fast mult(P, A, B, clock);
 	always @(posedge clock)
-		P_ref <= #20 A*B;
+		P_ref <= #16 A*B;
 	// loop through all possible inputs
 	integer i;
 	initial begin
 		#9;
 		for(i=0; i<256; i=i+1) begin
 			{A, B} <= i;
-			#10;
+			#8;
 		end
 		#21 $finish;
 	end
